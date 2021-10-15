@@ -21,11 +21,17 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 	/* call function that creates new node */
 	left_node = binary_tree_node(parent, value);
 
+	/* malloc return */
+	if (left_node == NULL)
+	{
+		return (NULL);
+	}
+
 	/* link child to left parent */
 	left_node->left = parent->left;
 
 	/* check if exists */
-	if(left_node->left != NULL)
+	if (left_node->left != NULL)
 	{
 		left_node->left->parent = left_node;
 	}
