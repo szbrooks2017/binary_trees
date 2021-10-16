@@ -1,6 +1,6 @@
 #include "binary_trees.h"
 
-/** 
+/**
  * binary_tree_height - finds the distance from root to farthest leaf
  * @tree: pointer to the root node of the tree
  * Return: the number of generation or 0 if null
