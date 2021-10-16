@@ -1,47 +1,64 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_height - finds the distance from root to farthest leaf
- * @tree: pointer to the root node of the tree
- * Return: the number of generation or 0 if null
+ * find_depth - finds the distance from the tree to that node
+ * @tree: is a pointer to the tree of the tree
+ * Return: returns the distance
  */
 
-size_t binary_tree_height(const binary_tree_t *tree)
+int find_depth(const binary_tree_t *tree)
 {
-	size_t left_height, right_height;
+	int depth = 0;
 
-	if (tree == NULL)
+	while (tree)
 	{
-		return (0);
+		depth++;
+		tree = tree->left;
 	}
 
-	left_height = binary_tree_height(tree->left);
-	right_height = binary_tree_height(tree->right);
+	return (depth);
 
-	if (left_height > right_height)
-	{
-		return (left_height + 1);
-	}
-	else
-	{
-		return (right_height + 1);
-	}
 }
 
 /**
  * binary_tree_is_perfect - finds if each parent has two nodes
- * @tree: is the pointer to the root of the tree
+ * @tree: is the pointer to the tree of the tree
  * Return: returns a boolean int
  */
 
+int find_perfect(const binary_tree_t *tree, int d, int level)
+{
+	if (tree == NULL)
+	{
+		return (1);
+	}
+
+	if (tree->left == NULL && tree->right == NULL)
+	{
+		return (d == level + 1);
+	}
+
+	if (tree->left == NULL || tree->right == NULL)
+	{
+		return (0);
+	}
+
+	return (find_perfect(tree->left, d, level + 1) && find_perfect(tree->right, d, level + 1));
+
+}
+
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
+	int d;
+
 	if (tree == NULL)
 	{
 		return (0);
 	}
 
-	if (binary_tree_height(tree->left) == binary_tree_height(tree->right))
+	d = find_depth(tree);
+
+	if (find_perfect(tree, d, 0))
 	{
 		return (1);
 	}
@@ -49,4 +66,6 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	{
 		return (0);
 	}
+
 }
+
