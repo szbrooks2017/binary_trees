@@ -21,8 +21,11 @@ int find_depth(const binary_tree_t *tree)
 }
 
 /**
- * binary_tree_is_perfect - finds if each parent has two nodes
+ * find_perfect - finds if each parent has two nodes
  * @tree: is the pointer to the tree of the tree
+ * @d: is the depth of one of the sides
+ * @level: is the generation of the tree
+ *
  * Return: returns a boolean int
  */
 
@@ -43,9 +46,16 @@ int find_perfect(const binary_tree_t *tree, int d, int level)
 		return (0);
 	}
 
-	return (find_perfect(tree->left, d, level + 1) && find_perfect(tree->right, d, level + 1));
+	return (find_perfect(tree->left, d, level + 1) &&
+			find_perfect(tree->right, d, level + 1));
 
 }
+
+/**
+ * binary_tree_is_perfect - finds the distance from the tree to that node
+ * @tree: is a pointer to the tree of the tree
+ * Return: returns the distance
+ */
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
